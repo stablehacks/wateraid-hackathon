@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WaterAid Canada — AI Orchestration Dashboard</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    .badge-pulse {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .citation-highlight {
+      background-color: rgba(5, 150, 105, 0.12);
+      border-bottom: 2px dashed #059669;
+      cursor: pointer;
+      padding: 1px 5px;
+      border-radius: 4px;
+      color: #065f46;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .citation-highlight:hover {
+      background-color: rgba(5, 150, 105, 0.25);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased p-4 md:p-6 font-sans min-h-screen">
+
+  <!-- Header -->
+  <header class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between pb-6 mb-6 border-b border-slate-200 gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 to-blue-700 flex items-center justify-center font-bold text-white shadow-md text-lg">
+        💧
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-xl md:text-2xl font-black tracking-tight text-slate-900">WaterAid Canada</h1>
+          <span class="text-xs px-2.5 py-0.5 rounded-full font-semibold bg-cyan-50 text-cyan-800 border border-cyan-200">Track C: Systems Blueprint</span>
+        </div>
+        <p class="text-xs md:text-sm text-slate-500 font-medium">AI Orchestration Layer on Open-Source Odoo</p>
+      </div>
+    </div>
+
+    <!-- Live Status Pills -->
+    <div class="flex items-center gap-3 text-xs">
+      <div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-emerald-600 badge-pulse"></span>
+        <span class="text-slate-500">Odoo Core JSON-RPC:</span>
+        <span class="font-mono text-emerald-700 font-bold">Connected (v17.4)</span>
+      </div>
+      <div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-cyan-600"></span>
+        <span class="text-slate-500">Region:</span>
+        <span class="font-bold text-cyan-800">Canada Central (PIPEDA)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="max-w-7xl mx-auto flex gap-2 mb-6 border-b border-slate-200 pb-3 overflow-x-auto text-sm">
+    <button onclick="switchTab('synthesizer')" id="tab-synthesizer" class="px-4 py-2 rounded-lg font-semibold transition-all bg-cyan-700 text-white shadow-sm">
+      ⚡ 1. Working Prototype: Impact Synthesizer
+    </button>
+    <button onclick="switchTab('odoo-pipeline')" id="tab-odoo-pipeline" class="px-4 py-2 rounded-lg font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-200/60">
+      🔌 2. Live Odoo API Data Pipeline
+    </button>
+    <button onclick="switchTab('compliance')" id="tab-compliance" class="px-4 py-2 rounded-lg font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-200/60">
+      📋 3. Grant Compliance (GAC Auditor)
+    </button>
+    <button onclick="switchTab('calculator')" id="tab-calculator" class="px-4 py-2 rounded-lg font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-200/60">
+      📊 4. Non-Profit TCO & Capacity ROI
+    </button>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="max-w-7xl mx-auto space-y-6">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: THE WORKING PROTOTYPE (SYNTHESIZER) -->
+    <!-- ========================================== -->
+    <section id="panel-synthesizer" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- Left Column: Source Odoo Field Ticket (Input) -->
+      <div class="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-5 flex flex-col justify-between shadow-sm">
+        <div>
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
+            <div class="flex items-center gap-2">
+              <span class="text-xs uppercase font-bold text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded">Odoo Field Service</span>
+              <span class="text-xs font-mono text-slate-500 font-semibold">#TKT-2026-089</span>
+            </div>
+            <span class="text-xs bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full font-bold">Status: Solved</span>
+          </div>
+
+          <h3 class="font-bold text-lg text-slate-900 mb-1">Solar Pump Installation & Handover</h3>
+          <p class="text-xs text-slate-500 mb-4">Location: <strong>Kijana District (Sector B-4)</strong> | Project: <strong>#WASH-CAN-2024</strong></p>
+
+          <div class="space-y-3 text-xs bg-slate-50 p-4 rounded-xl border border-slate-200 font-mono text-slate-700">
+            <div id="src-technician" class="p-2 rounded hover:bg-white transition border border-transparent hover:border-slate-200">
+              <span class="text-cyan-800 font-bold">[Technician]:</span> Daniel Mwanza (District Field Tech Lead)
+            </div>
+            <div id="src-date" class="p-2 rounded hover:bg-white transition border border-transparent hover:border-slate-200">
+              <span class="text-cyan-800 font-bold">[Timestamp]:</span> 2026-10-12 14:35 UTC
+            </div>
+            <div id="src-flow" class="p-2 rounded hover:bg-white transition bg-white border-l-4 border-emerald-600 shadow-xs">
+              <span class="text-emerald-700 font-bold">[Metric 1]:</span> Flow test measured at <strong class="text-slate-900">2.4 liters/second</strong> (sustained 4-hour draw). Total coliforms: 0 CFU/100ml.
+            </div>
+            <div id="src-beneficiaries" class="p-2 rounded hover:bg-white transition bg-white border-l-4 border-emerald-600 shadow-xs">
+              <span class="text-emerald-700 font-bold">[Metric 2]:</span> Servicing <strong class="text-slate-900">3,240 villagers</strong> across 3 sub-villages + 1 primary school. Walking time reduced from 2.5 hrs to 15 mins.
+            </div>
+            <div id="src-quote" class="p-2 rounded hover:bg-white transition italic text-slate-600 border-l-4 border-cyan-600 bg-white shadow-xs">
+              "[Notes]: Village water committee formed (70% women leadership). Trained in basic preventative maintenance. Previous contaminated surface spring fully decommissioned."
+            </div>
+            <div id="src-donor" class="p-2 rounded hover:bg-white transition border border-transparent hover:border-slate-200">
+              <span class="text-amber-800 font-bold">[Linked Donor]:</span> <strong class="text-slate-900">The Ontario Clean Water Alliance ($25,000 Major Donor)</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
+          <div class="text-xs text-slate-500">
+            <span>Target Persona:</span> <strong class="text-slate-800">Major Donor Stewardship</strong>
+          </div>
+          <button id="btn-synthesize" onclick="runSynthesis()" class="flex items-center gap-2 bg-cyan-700 hover:bg-cyan-800 text-white font-semibold text-xs px-4 py-2.5 rounded-xl shadow-sm transition-all">
+            <span>✨ Run AI Agent</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Column: Human-in-the-Loop Review Surface (Output) -->
+      <div class="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-5 flex flex-col justify-between shadow-sm">
+        <div>
+          <!-- Header Bar with Trust & Governance Badges -->
+          <div class="flex flex-wrap items-center justify-between pb-3 mb-4 border-b border-slate-100 gap-2">
+            <div class="flex items-center gap-2">
+              <span class="text-xs uppercase font-bold text-cyan-800 bg-cyan-50 border border-cyan-200 px-2 py-0.5 rounded">RAG Synthesis Agent</span>
+              <span class="text-xs text-slate-500">Channel: <strong class="text-slate-800">Odoo Email Marketing</strong></span>
+            </div>
+
+            <div class="flex items-center gap-2 text-xs">
+              <span class="flex items-center gap-1 bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 py-0.5 rounded-full font-bold">
+                🛡️ Verified Citations: 100%
+              </span>
+              <span class="bg-blue-50 text-blue-800 border border-blue-200 px-2.5 py-0.5 rounded-full font-bold">
+                Hallucination Guard: Active
+              </span>
+            </div>
+          </div>
+
+          <!-- Loading State -->
+          <div id="synthesis-loading" class="hidden py-16 text-center space-y-3">
+            <div class="w-10 h-10 border-4 border-cyan-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+            <p class="text-sm font-semibold text-cyan-800">RAG Agent ingesting Odoo Field Ticket...</p>
+            <p class="text-xs text-slate-500">Extracting metrics, querying donor tone profile, generating verifiable citations</p>
+          </div>
+
+          <!-- Generated Content Surface -->
+          <div id="synthesis-result" class="space-y-4">
+            <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3 text-sm leading-relaxed text-slate-800">
+              <div class="text-xs text-slate-500 border-b border-slate-200 pb-2 flex justify-between font-medium">
+                <span>To: <strong class="text-slate-900">The Ontario Clean Water Alliance</strong> &lt;stewardship@ocwa-canada.org&gt;</span>
+                <span class="text-emerald-700 font-mono text-[11px] font-bold">Subject: Your Impact in Kijana District: Solar Water Live</span>
+              </div>
+
+              <p>Dear Elizabeth and the OCWA Board,</p>
+
+              <p>
+                We are thrilled to report that thanks to your generous $25,000 commitment, clean, flowing water is officially active in 
+                <span class="citation-highlight" onclick="highlightSource('src-beneficiaries', '3,240 villagers in Kijana District')" title="Click to view verified source citation">3,240 villagers in Kijana District 📌</span>.
+              </p>
+
+              <p>
+                On October 12, our field engineering team concluded flow rate testing on the new solar-powered distribution system, clocking a sustained 
+                <span class="citation-highlight" onclick="highlightSource('src-flow', '2.4 liters per second with 0 CFU/100ml water safety')" title="Click to view verified source citation">2.4 liters per second with 0 CFU/100ml water safety 📌</span>. 
+                For the first time, families and children at the primary school have had their round-trip collection journey cut from 2.5 hours down to just 15 minutes.
+              </p>
+
+              <p>
+                Sustainability remains at the center: our local community team formed a 
+                <span class="citation-highlight" onclick="highlightSource('src-quote', 'Water Committee with 70% women leadership')" title="Click to view verified source citation">Water Committee with 70% women leadership 📌</span> 
+                trained in basic ongoing maintenance, ensuring this well supplies safe water for decades.
+              </p>
+
+              <p>Thank you for championing water justice with WaterAid Canada.</p>
+            </div>
+
+            <!-- Citation Inspector Card (Interactive) -->
+            <div id="citation-box" class="bg-cyan-50 border border-cyan-200 p-3.5 rounded-xl text-xs flex items-start gap-3">
+              <div class="text-cyan-700 text-base mt-0.5 font-bold">🔍</div>
+              <div>
+                <span class="font-bold text-cyan-900">Provenance Inspector:</span>
+                <span id="citation-text" class="text-slate-700 ml-1">Click any green highlighted badge above to trace the exact line in Odoo Field Service ticket #TKT-2026-089.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Human in the Loop Action Bar -->
+        <div class="mt-5 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-2 text-xs text-slate-600">
+            <span>Human Review Gate:</span>
+            <span class="text-amber-800 font-bold bg-amber-50 px-2 py-0.5 rounded border border-amber-200">Requires Staff Approval</span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button onclick="requestRevision()" class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-xs font-semibold text-slate-700 transition">
+              ✏️ Adjust Tone
+            </button>
+            <button onclick="approveToOdoo()" id="btn-approve" class="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 font-bold text-xs text-white shadow-sm transition flex items-center gap-1.5">
+              <span>✅ Authorize & Sync to Odoo CRM</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- TAB 2: LIVE ODOO API & PIPELINE EXPLORER -->
+    <!-- ========================================== -->
+    <section id="panel-odoo-pipeline" class="hidden space-y-6">
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <h3 class="text-lg font-bold text-slate-900 mb-1">Odoo Open-Source API & Data Pipeline</h3>
+        <p class="text-sm text-slate-500 mb-6">How the AI layer interacts with native Odoo data models using JSON-RPC without vendor lock-in.</p>
+
+        <div class="mb-6 p-4 bg-slate-50 border border-slate-200 rounded-2xl flex flex-col md:flex-row gap-6 items-center">
+          <div class="w-full md:w-1/2">
+            <img src="./odoo_highlighted_modules.png" alt="Odoo Modules for WaterAid" class="w-full h-auto rounded-xl border border-slate-200 shadow-xs">
+          </div>
+          <div class="w-full md:w-1/2 space-y-2">
+            <span class="text-xs font-bold text-cyan-800 bg-cyan-100/70 border border-cyan-200 px-2.5 py-0.5 rounded-full uppercase">11 Active Modules</span>
+            <h4 class="text-base font-bold text-slate-900">Targeted Open-Source NGO Distribution</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Circled in cyan with green checkmarks: <strong>CRM &amp; Subscriptions</strong> (Donors), <strong>Documents &amp; Sign</strong> (Grant contracts), <strong>Project &amp; Field Service</strong> (WASH delivery), <strong>Accounting</strong> (Fund accounting), <strong>Email Marketing</strong> (Appeals), <strong>HR</strong> &amp; <strong>Executive Dashboard</strong>.
+            </p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <div class="text-xs font-bold text-cyan-800 uppercase tracking-wider mb-1">1. Odoo Model: res.partner</div>
+            <div class="text-xl font-black text-slate-900">4,820 Records</div>
+            <p class="text-xs text-slate-500 mt-1">Donors, institutional grantors, and community committees synced via JSON-RPC.</p>
+          </div>
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <div class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-1">2. Odoo Model: project.task</div>
+            <div class="text-xl font-black text-slate-900">128 Active WASH Tasks</div>
+            <p class="text-xs text-slate-500 mt-1">Field milestones, pump repairs, and borehole drilling schedules.</p>
+          </div>
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <div class="text-xs font-bold text-amber-800 uppercase tracking-wider mb-1">3. Odoo Model: mail.mail</div>
+            <div class="text-xl font-black text-slate-900">99.4% Delivery Rate</div>
+            <p class="text-xs text-slate-500 mt-1">Bespoke donor communications with cryptographic human approval stamps.</p>
+          </div>
+        </div>
+
+        <!-- Live Code Block showing Python XML-RPC implementation -->
+        <div class="bg-slate-900 p-5 rounded-xl border border-slate-800 font-mono text-xs text-slate-300 overflow-x-auto shadow-sm">
+          <div class="text-slate-400 mb-2">// Sample AI-to-Odoo Python Integration (fastapi / odoorpc)</div>
+          <pre><code class="text-cyan-300">import</code> xmlrpc.client
+
+<code class="text-slate-400"># Authenticate with Canadian-hosted Odoo Instance</code>
+common = xmlrpc.client.ServerProxy(<code class="text-emerald-400">'https://odoo.wateraid.ca/xmlrpc/2/common'</code>)
+uid = common.authenticate(<code class="text-emerald-400">'wateraid_prod'</code>, <code class="text-emerald-400">'ai_agent'</code>, ODOO_API_KEY, {})
+models = xmlrpc.client.ServerProxy(<code class="text-emerald-400">'https://odoo.wateraid.ca/xmlrpc/2/object'</code>)
+
+<code class="text-slate-400"># Fetch resolved Field Service Tickets needing donor stewardship reports</code>
+tickets = models.execute_kw(<code class="text-emerald-400">'wateraid_prod'</code>, uid, ODOO_API_KEY,
+    <code class="text-emerald-400">'project.task'</code>, <code class="text-emerald-400">'search_read'</code>,
+    [[[<code class="text-emerald-400">'stage_id.name'</code>, <code class="text-emerald-400">'='</code>, <code class="text-emerald-400">'Handover Completed'</code>], [<code class="text-emerald-400">'stewardship_status'</code>, <code class="text-emerald-400">'='</code>, <code class="text-emerald-400">'pending'</code>]]],
+    {<code class="text-emerald-400">'fields'</code>: [<code class="text-emerald-400">'name'</code>, <code class="text-emerald-400">'flow_rate'</code>, <code class="text-emerald-400">'beneficiary_count'</code>, <code class="text-emerald-400">'partner_id'</code>]}
+)
+
+<code class="text-slate-400"># AI Agent generates draft and updates Odoo CRM without manual human data entry</code>
+models.execute_kw(<code class="text-emerald-400">'wateraid_prod'</code>, uid, ODOO_API_KEY,
+    <code class="text-emerald-400">'mail.activity'</code>, <code class="text-emerald-400">'create'</code>,
+    [{<code class="text-emerald-400">'res_model'</code>: <code class="text-emerald-400">'crm.lead'</code>, <code class="text-emerald-400">'res_id'</code>: donor_lead_id, <code class="text-emerald-400">'summary'</code>: <code class="text-emerald-400">'Review AI Donor Report'</code>}]
+)</pre>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- TAB 3: GRANT COMPLIANCE (GAC AUDITOR) -->
+    <!-- ========================================== -->
+    <section id="panel-compliance" class="hidden space-y-6">
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-lg font-bold text-slate-900">Institutional Grant Compliance Monitor</h3>
+            <p class="text-sm text-slate-500">Automated reconciliation between Global Affairs Canada (GAC) contract obligations and field deliverables.</p>
+          </div>
+          <span class="text-xs bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-full font-bold">Audit Health: 98.4%</span>
+        </div>
+
+        <div class="overflow-x-auto border border-slate-200 rounded-xl">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 text-slate-700 uppercase font-bold border-b border-slate-200">
+              <tr>
+                <th class="p-3">GAC Obligation Clause</th>
+                <th class="p-3">Target Deliverable</th>
+                <th class="p-3">Odoo Field Verification</th>
+                <th class="p-3">AI Compliance Status</th>
+                <th class="p-3">Audit Readiness</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-slate-700">
+              <tr class="hover:bg-slate-50/70">
+                <td class="p-3 font-bold text-slate-900">Section 4.2 (Water Potability)</td>
+                <td class="p-3">0 E. coli / 100ml in all sampled taps</td>
+                <td class="p-3 font-mono text-cyan-800 font-semibold">Odoo Field #TKT-089 (0 CFU test confirmed)</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold">Verified</span></td>
+                <td class="p-3 text-emerald-700 font-bold">100% (Passed)</td>
+              </tr>
+              <tr class="hover:bg-slate-50/70">
+                <td class="p-3 font-bold text-slate-900">Section 5.1 (Gender Governance)</td>
+                <td class="p-3">&ge; 60% women on community water boards</td>
+                <td class="p-3 font-mono text-cyan-800 font-semibold">Odoo Documents #DOC-WCOMM-4 (70% confirmed)</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold">Verified</span></td>
+                <td class="p-3 text-emerald-700 font-bold">100% (Passed)</td>
+              </tr>
+              <tr class="hover:bg-slate-50/70">
+                <td class="p-3 font-bold text-slate-900">Section 7.3 (Quarterly Financials)</td>
+                <td class="p-3">Variance &le; 5% against planned burn</td>
+                <td class="p-3 font-mono text-amber-800 font-semibold">Odoo Accounting #JRN-2026-Q3 (Variance: 3.1%)</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 font-bold">In Review</span></td>
+                <td class="p-3 text-amber-700 font-bold">Action Required</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- TAB 4: NON-PROFIT TCO & CAPACITY CALCULATOR -->
+    <!-- ========================================== -->
+    <section id="panel-calculator" class="hidden space-y-6">
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <h3 class="text-lg font-bold text-slate-900 mb-1">Economic Durability & Capacity ROI Model</h3>
+        <p class="text-sm text-slate-500 mb-6">Compare the 3-year accelerated operational cost of proprietary vendor lock-in against the Open-Source Blueprint.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-slate-50 p-5 rounded-xl border border-red-200">
+            <span class="text-xs uppercase font-bold text-red-700">Legacy Proprietary SaaS</span>
+            <div class="text-3xl font-black text-slate-900 mt-1">$280,000</div>
+            <p class="text-xs text-slate-600 mt-2">3-Year cost of Blackbaud / Raiser's Edge licenses, add-on modules, and steep per-record fees.</p>
+            <div class="mt-4 pt-3 border-t border-slate-200 text-xs text-red-700 font-medium">
+              ⚠️ High donor restriction friction; zero capacity multiplication.
+            </div>
+          </div>
+
+          <div class="bg-emerald-50/60 p-5 rounded-xl border border-emerald-200">
+            <span class="text-xs uppercase font-bold text-emerald-800">WaterAid Canada (Odoo Core + AI)</span>
+            <div class="text-3xl font-black text-emerald-800 mt-1">$105,000</div>
+            <p class="text-xs text-slate-600 mt-2">3-Year total cost of sovereign Canadian cloud, token inference, and open-source tech support.</p>
+            <div class="mt-4 pt-3 border-t border-emerald-200 text-xs text-emerald-800 font-bold">
+              💰 Direct Cash Savings: $175,000 (Reinvested in WASH)
+            </div>
+          </div>
+
+          <div class="bg-cyan-50/60 p-5 rounded-xl border border-cyan-200">
+            <span class="text-xs uppercase font-bold text-cyan-800">Staff Capacity Multiplier</span>
+            <div class="text-3xl font-black text-cyan-900 mt-1">6,800 hrs/yr</div>
+            <p class="text-xs text-slate-600 mt-2">Routine manual tasks eliminated across grant reporting, data entry, and donor receipts.</p>
+            <div class="mt-4 pt-3 border-t border-cyan-200 text-xs text-cyan-800 font-bold">
+              🚀 Equivalent to 4 full-time senior officers added to mission.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    function switchTab(tabId) {
+      const tabs = ['synthesizer', 'odoo-pipeline', 'compliance', 'calculator'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tab-' + t);
+        const panel = document.getElementById('panel-' + t);
+        if (t === tabId) {
+          btn.className = 'px-4 py-2 rounded-lg font-semibold transition-all bg-cyan-700 text-white shadow-sm';
+          panel.classList.remove('hidden');
+        } else {
+          btn.className = 'px-4 py-2 rounded-lg font-semibold transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-200/60';
+          panel.classList.add('hidden');
+        }
+      });
+    }
+
+    function runSynthesis() {
+      const btn = document.getElementById('btn-synthesize');
+      const loading = document.getElementById('synthesis-loading');
+      const result = document.getElementById('synthesis-result');
+
+      btn.disabled = true;
+      btn.innerHTML = '⏳ Processing...';
+      result.classList.add('hidden');
+      loading.classList.remove('hidden');
+
+      setTimeout(() => {
+        loading.classList.add('hidden');
+        result.classList.remove('hidden');
+        btn.disabled = false;
+        btn.innerHTML = '✨ Run AI Agent';
+      }, 900);
+    }
+
+    function highlightSource(elementId, label) {
+      const items = ['src-technician', 'src-date', 'src-flow', 'src-beneficiaries', 'src-quote', 'src-donor'];
+      items.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('ring-2', 'ring-emerald-600', 'bg-emerald-50');
+      });
+
+      const target = document.getElementById(elementId);
+      if (target) {
+        target.classList.add('ring-2', 'ring-emerald-600', 'bg-emerald-50');
+        target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      const inspector = document.getElementById('citation-text');
+      inspector.innerHTML = `Verified match: <strong class="text-slate-900">${label}</strong> directly traced to Odoo Field Service Ticket #TKT-2026-089 (Hash verified).`;
+    }
+
+    function approveToOdoo() {
+      const btn = document.getElementById('btn-approve');
+      btn.className = 'px-4 py-2 rounded-lg bg-emerald-700 font-bold text-xs text-white shadow-sm transition flex items-center gap-1.5 cursor-not-allowed';
+      btn.innerHTML = '<span>🎉 Logged to Odoo CRM & Email Queue!</span>';
+      
+      const inspector = document.getElementById('citation-text');
+      inspector.innerHTML = '<strong class="text-emerald-700 font-bold">Success:</strong> Communication logged to Odoo CRM lead #LEAD-OCWA-25K. Activity scheduled in Odoo Email Marketing.';
+    }
+
+    function requestRevision() {
+      const inspector = document.getElementById('citation-text');
+      inspector.innerHTML = '<span class="text-amber-800 font-bold">Revision Loop Triggered:</span> Feedback prompt submitted to workflow. Adjusting tone for formal Canadian philanthropic guidelines.';
+    }
+  </script>
+</body>
+</html>

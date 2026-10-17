@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reimagining WaterAid Canada with AI and Open-Source</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    .slide {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.25s ease-in-out;
+    }
+    .slide.active {
+      display: flex;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased min-h-screen flex flex-col justify-between font-sans selection:bg-cyan-600 selection:text-white">
+
+  <!-- Top Bar: Deck Info & 5-Min Presentation Timer -->
+  <header class="border-b border-slate-200 bg-white/90 backdrop-blur px-6 py-3 flex items-center justify-between text-xs shadow-sm">
+    <div class="flex items-center gap-3">
+      <div class="w-7 h-7 rounded-lg bg-cyan-600 flex items-center justify-center font-bold text-white text-sm shadow-sm">💧</div>
+      <span class="font-extrabold text-slate-900 tracking-wide text-sm">WATERAID CANADA</span>
+      <span class="text-slate-300">|</span>
+      <span class="text-slate-500 font-medium">Executive Strategy Pitch</span>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <!-- 5-Minute Presentation Timer -->
+      <div class="flex items-center gap-2 bg-slate-100 border border-slate-200 px-3 py-1 rounded-full text-slate-700">
+        <span class="text-slate-500 font-medium">Timer:</span>
+        <span id="timer-display" class="font-mono font-bold text-cyan-700 text-sm">05:00</span>
+        <button onclick="toggleTimer()" id="timer-btn" class="text-slate-600 hover:text-cyan-700 ml-1 font-bold">▶</button>
+      </div>
+
+      <!-- Speaker Notes Toggle -->
+      <button onclick="toggleNotes()" id="notes-toggle-btn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1 rounded-lg font-medium transition flex items-center gap-1.5 border border-slate-200">
+        <span>🎙️ Presenter Script</span>
+      </button>
+
+      <span class="text-slate-500 font-mono font-semibold" id="slide-indicator">Slide 1 of 8</span>
+    </div>
+  </header>
+
+  <!-- Slide Stage Container -->
+  <main class="flex-1 max-w-6xl w-full mx-auto p-6 md:p-10 flex flex-col justify-center">
+
+    <!-- ========================================== -->
+    <!-- SLIDE 1: TITLE & HOOK                      -->
+    <!-- ========================================== -->
+    <section class="slide active flex-col items-center justify-center text-center space-y-6 py-8" data-slide="1">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-800 text-xs font-semibold uppercase tracking-wider">
+        Strategic Operating Blueprint (2026–2029)
+      </div>
+      <h1 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight max-w-4xl">
+        Reimagining WaterAid Canada with <span class="bg-gradient-to-r from-cyan-600 to-blue-700 bg-clip-text text-transparent">AI and Open-Source</span>
+      </h1>
+      <p class="text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed">
+        Breaking the non-profit administrative trap: How an open-source foundation and an AI orchestration layer can multiply our mission impact by <strong class="text-slate-900">4.2x</strong> without growing overhead.
+      </p>
+      <div class="pt-6 flex flex-wrap gap-4 justify-center text-xs text-slate-600 font-medium">
+        <span class="bg-white border border-slate-200 shadow-sm px-3.5 py-1.5 rounded-lg">🌍 Mission First</span>
+        <span class="bg-white border border-slate-200 shadow-sm px-3.5 py-1.5 rounded-lg">🔒 Sovereign Canadian Hosting (PIPEDA)</span>
+        <span class="bg-white border border-slate-200 shadow-sm px-3.5 py-1.5 rounded-lg">🛡️ 100% Human-in-the-Loop Governance</span>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 2: CURRENT TRUTH (THE CONTEXT)       -->
+    <!-- ========================================== -->
+    <section class="slide flex-col space-y-6" data-slide="2">
+      <div>
+        <span class="text-xs font-bold text-cyan-700 uppercase tracking-wider">Current Truth</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-1">A Lean Team with a Monumental Mandate</h2>
+        <p class="text-slate-600 text-sm">WaterAid Canada punches far above its weight on the global stage.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+        <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-3">
+          <div class="text-3xl">🤝</div>
+          <h3 class="font-bold text-slate-900 text-base">Resource Mobilization</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Inspiring Canadian individuals, corporate partners, and major donors to invest in sustainable water, sanitation, and hygiene worldwide.
+          </p>
+        </div>
+        <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-3">
+          <div class="text-3xl">🏛️</div>
+          <h3 class="font-bold text-slate-900 text-base">Policy & Institutional Grants</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Leading international advocacy and stewarding multi-million-dollar federal grants with Global Affairs Canada (GAC) and multilateral institutions.
+          </p>
+        </div>
+        <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-3">
+          <div class="text-3xl">🌐</div>
+          <h3 class="font-bold text-slate-900 text-base">The Global Federation Model</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Partnering across an autonomous international federation to deliver clean water programs directly through local Country Programmes in Africa and Asia.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-cyan-50 border border-cyan-200 p-4 rounded-xl text-xs text-cyan-900 flex items-center gap-3">
+        <span class="text-xl">💡</span>
+        <span><strong>The reality:</strong> Our staff are world-class subject matter experts. But their most valuable asset—their time—is increasingly consumed by non-mission administrative work.</span>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 3: THE PROBLEM (THE BOTTLENECK)      -->
+    <!-- ========================================== -->
+    <section class="slide flex-col space-y-6" data-slide="3">
+      <div>
+        <span class="text-xs font-bold text-red-600 uppercase tracking-wider">The Problem</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-1">The Non-Profit Scaling Paradox</h2>
+        <p class="text-slate-600 text-sm">Every new grant and donor currently creates an exponential administrative burden.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+        <div class="bg-white border border-red-200 p-6 rounded-2xl shadow-sm space-y-3">
+          <div class="text-3xl">💸</div>
+          <h3 class="font-bold text-slate-900 text-base">The Proprietary SaaS Tax</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Legacy suites like Blackbaud cost <strong class="text-red-700 font-semibold">$48,000+/year</strong> in licensing fees alone. Because donors strictly cap administrative overhead, every software dollar is a dollar diverted from clean water.
+          </p>
+        </div>
+        <div class="bg-white border border-amber-200 p-6 rounded-2xl shadow-sm space-y-3">
+          <div class="text-3xl">🧩</div>
+          <h3 class="font-bold text-slate-900 text-base">The Spreadsheet Drag</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Donor history in Raiser's Edge, GAC contract terms in SharePoint, and WASH field metrics in disconnected Excel sheets. Staff spend up to <strong class="text-amber-800 font-semibold">15 hours each week</strong> manually reconciling data.
+          </p>
+        </div>
+        <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-3">
+          <div class="text-3xl">🚧</div>
+          <h3 class="font-bold text-slate-900 text-base">The Overhead Growth Ceiling</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Under today's model, doubling our water impact requires doubling administrative headcount. Non-profit governance rules make that impossible. We need a new way to scale.
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-red-50 border border-red-200 p-4 rounded-xl text-xs text-red-900 font-medium">
+        ⚠️ <strong>The core friction:</strong> When senior officers spend days copy-pasting report metrics and reformatting donor receipts, fewer major gifts are closed, and fewer water points are built.
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 4: THE VISION (THE NEW OPERATING MODEL) -->
+    <!-- ========================================== -->
+    <section class="slide flex-col space-y-6" data-slide="4">
+      <div>
+        <span class="text-xs font-bold text-cyan-700 uppercase tracking-wider">The Vision</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-1">Reinvesting Software Rent into Mission Capacity</h2>
+        <p class="text-slate-600 text-sm">Replacing expensive proprietary software with open-source Odoo, augmented by an AI co-pilot.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+        <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-4">
+          <div class="flex items-center gap-2">
+            <span class="w-8 h-8 rounded-lg bg-cyan-100 text-cyan-800 font-bold flex items-center justify-center text-sm">1</span>
+            <h3 class="font-bold text-slate-900 text-lg">An Open-Source Operating Backbone</h3>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Instead of paying thousands to private software monopolies, WaterAid Canada deploys <strong>Odoo Community</strong> hosted securely on Canadian soil. One unified database uniting donors, grant agreements, accounting, and field tickets.
+          </p>
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs text-slate-700 font-medium">
+            ✅ <strong>Result:</strong> $0 annual license fees; complete data ownership; total PIPEDA privacy compliance.
+          </div>
+        </div>
+
+        <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-4">
+          <div class="flex items-center gap-2">
+            <span class="w-8 h-8 rounded-lg bg-blue-100 text-blue-800 font-bold flex items-center justify-center text-sm">2</span>
+            <h3 class="font-bold text-slate-900 text-lg">An AI Orchestration Layer</h3>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Intelligent digital assistants sit on top of Odoo via standard APIs. They read field data, check GAC grant obligations, and draft donor updates—presenting audit-ready briefs for human approval.
+          </p>
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-xs text-slate-700 font-medium">
+            🚀 <strong>Result:</strong> 6,800 hours/year reallocated from manual data entry back to human relationships and policy.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 5: THE COMPONENTS (HOW IT WORKS)     -->
+    <!-- ========================================== -->
+    <section class="slide flex-col space-y-5" data-slide="5">
+      <div>
+        <span class="text-xs font-bold text-cyan-700 uppercase tracking-wider">The Components</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-1">The Joined-Up Architecture</h2>
+        <p class="text-slate-600 text-sm">How open-source software, AI agents, and human oversight connect seamlessly.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center pt-1">
+        <!-- Visual Odoo Suite with Circles -->
+        <div class="lg:col-span-6 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <span class="text-xs font-bold text-slate-900">Odoo Open-Source Foundation</span>
+            <span class="text-[11px] font-bold text-cyan-800 bg-cyan-50 border border-cyan-200 px-2 py-0.5 rounded-full">
+              11 Modules Configured for WaterAid
+            </span>
+          </div>
+          <div class="overflow-hidden rounded-xl border border-slate-100 bg-slate-50 flex items-center justify-center">
+            <img src="./odoo_highlighted_modules.png" 
+                 alt="Odoo Modules Configured for WaterAid Canada" 
+                 class="w-full h-auto object-contain max-h-[300px]">
+          </div>
+          <p class="text-[11px] text-slate-500 text-center font-medium">
+            Circled in cyan: CRM & Subscriptions, Docs & Sign, Project & Field Service, Accounting, Email, HR, Dashboard.
+          </p>
+        </div>
+
+        <!-- 3 Connected Layers -->
+        <div class="lg:col-span-6 space-y-3">
+          <div class="bg-white border border-cyan-200 p-4 rounded-xl shadow-xs">
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-cyan-700 text-white font-bold text-xs flex items-center justify-center">1</span>
+              <h4 class="font-bold text-slate-900 text-sm">System of Record (Odoo)</h4>
+            </div>
+            <p class="text-xs text-slate-600 mt-1">One unified database in Canada holding donor relationships, field service pump logs, and institutional grant milestones.</p>
+          </div>
+
+          <div class="bg-white border border-blue-200 p-4 rounded-xl shadow-xs">
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-blue-700 text-white font-bold text-xs flex items-center justify-center">2</span>
+              <h4 class="font-bold text-slate-900 text-sm">System of Intelligence (AI Multi-Agent)</h4>
+            </div>
+            <p class="text-xs text-slate-600 mt-1">Specialized agents connect via Python JSON-RPC to synthesize messy field data, audit GAC grant compliance, and draft personalized donor appeals.</p>
+          </div>
+
+          <div class="bg-white border border-emerald-200 p-4 rounded-xl shadow-xs">
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-emerald-700 text-white font-bold text-xs flex items-center justify-center">3</span>
+              <h4 class="font-bold text-slate-900 text-sm">Human-in-the-Loop Review Desks</h4>
+            </div>
+            <p class="text-xs text-slate-600 mt-1"><strong>Humans hold the keys:</strong> AI never sends an email or files a grant. Staff review citation-backed drafts with full sign-off authority.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 6: THE WORKING PROOF (LIVE DEMO)     -->
+    <!-- ========================================== -->
+    <section class="slide flex-col space-y-5" data-slide="6">
+      <div>
+        <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">The Working Proof</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-1">The Impact-to-Donor Synthesizer</h2>
+        <p class="text-slate-600 text-sm">Turning raw field inspection logs into verified donor stewardship briefs in seconds.</p>
+      </div>
+
+      <div class="bg-white border border-slate-200 shadow-sm rounded-2xl p-6 flex flex-col md:flex-row gap-6 items-center">
+        <div class="flex-1 space-y-3">
+          <div class="flex items-center gap-2 text-xs">
+            <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold border border-amber-300">RAW INPUT</span>
+            <span class="text-slate-700 font-mono font-semibold">Odoo Field Service Ticket #TKT-089 (Kijana District)</span>
+          </div>
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs text-slate-700 font-mono">
+            &gt; Solar pump test: 2.4 L/sec flow rate (0 CFU coliforms)<br>
+            &gt; 3,240 villagers in Kijana Sector B-4<br>
+            &gt; 70% women water committee established
+          </div>
+
+          <div class="flex items-center gap-2 text-xs pt-2">
+            <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold border border-emerald-300">AI SYNTHESIS</span>
+            <span class="text-slate-700 font-mono font-semibold">Audit-Ready Donor Brief</span>
+          </div>
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs text-slate-800 leading-relaxed">
+            "Dear OCWA Board, thanks to your $25,000 grant, clean water is active for <span class="text-emerald-700 font-semibold underline">3,240 villagers 📌</span> with <span class="text-emerald-700 font-semibold underline">2.4 L/s potable flow 📌</span>..."
+          </div>
+        </div>
+
+        <div class="w-full md:w-64 bg-cyan-50 border border-cyan-200 p-5 rounded-xl text-center space-y-2">
+          <div class="text-3xl">🛡️</div>
+          <div class="text-sm font-bold text-slate-900">Clickable Citations</div>
+          <p class="text-xs text-slate-600">Clicking any green badge reveals the technician signature and sensor timestamp.</p>
+          <div class="text-xs text-cyan-800 font-bold pt-1">100% Traceable • Zero Hallucinations</div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <a href="./dashboard.html" target="_blank" class="text-xs font-bold text-cyan-700 hover:underline">
+          👉 Open Interactive Dashboard Prototype in Browser
+        </a>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 7: THE IMPLEMENTATION (3-YEAR PLAN)  -->
+    <!-- ========================================== -->
+    <section class="slide flex-col space-y-5" data-slide="7">
+      <div>
+        <span class="text-xs font-bold text-purple-700 uppercase tracking-wider">The Implementation</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-1">A Disciplined 3-Year Operational Roadmap</h2>
+        <p class="text-slate-600 text-sm">Clear 36-month horizon with built-in leadership gates at Month 6, 18, and 30.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs pt-2">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 border-t-4 border-t-cyan-600 shadow-sm space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="font-extrabold text-slate-900 text-sm">Year 1: Foundation & Donor Pilot</span>
+            <span class="text-[11px] font-bold text-cyan-800 bg-cyan-50 px-2 py-0.5 rounded">Months 1–12</span>
+          </div>
+          <p class="text-slate-600">Deploy Odoo sandbox on Canadian cloud; pilot Impact Synthesizer with Ontario Clean Water Alliance.</p>
+          <div class="pt-2 border-t border-slate-100 text-slate-700">
+            <strong class="text-emerald-700 font-bold">Gate 1 (M6):</strong> Expand to live production only if accuracy &gt; 96% and staff save &gt; 5 hrs/week.
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 border-t-4 border-t-blue-600 shadow-sm space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="font-extrabold text-slate-900 text-sm">Year 2: Federal Grants & Ops</span>
+            <span class="text-[11px] font-bold text-blue-800 bg-blue-50 px-2 py-0.5 rounded">Months 13–24</span>
+          </div>
+          <p class="text-slate-600">Integrate GAC grant contract auditor, Project tasks, and Country Programme Field Service tickets.</p>
+          <div class="pt-2 border-t border-slate-100 text-slate-700">
+            <strong class="text-emerald-700 font-bold">Gate 2 (M18):</strong> Expand to live federal filings only if 100% clause agreement and 0 compliance flags.
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 border-t-4 border-t-emerald-600 shadow-sm space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="font-extrabold text-slate-900 text-sm">Year 3: Maturity & Global Mesh</span>
+            <span class="text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded">Months 25–36</span>
+          </div>
+          <p class="text-slate-600">Full fund accounting reconciliation, board intelligence, and open-sourcing API mesh for global federation partners.</p>
+          <div class="pt-2 border-t border-slate-100 text-slate-700">
+            <strong class="text-emerald-700 font-bold">Gate 3 (M30):</strong> Full board review; transition from pilot to permanent steady state.
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-slate-100 p-3.5 rounded-xl border border-slate-200 text-xs text-center text-slate-700">
+        🛡️ <strong>Leadership Safety Rule:</strong> If at any point accuracy drops below 88%, the pipeline halts and reverts to manual workflow.
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SLIDE 8: THE CONCLUSION (THE IMPACT)       -->
+    <!-- ========================================== -->
+    <section class="slide flex-col items-center justify-center text-center space-y-6 py-6" data-slide="8">
+      <div class="w-16 h-16 rounded-2xl bg-cyan-100 border border-cyan-200 flex items-center justify-center text-3xl mx-auto shadow-xs">
+        🌍
+      </div>
+      <h2 class="text-4xl md:text-5xl font-black text-slate-900 max-w-3xl leading-tight">
+        Bringing Clean Water to <span class="text-cyan-700">140,000 More People</span>
+      </h2>
+      <p class="text-slate-600 max-w-2xl text-base leading-relaxed">
+        By eliminating $105,000 in proprietary software licensing and multiplying staff capacity by 6,800 hours every year, WaterAid Canada gains the power of 4 senior specialists—devoted entirely to life-saving water programs.
+      </p>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-3xl pt-2 text-center">
+        <div class="bg-white border border-slate-200 p-4 rounded-xl shadow-xs">
+          <div class="text-2xl font-black text-emerald-600">$105,000</div>
+          <div class="text-[11px] text-slate-500 font-medium mt-1">Cash Reinvested</div>
+        </div>
+        <div class="bg-white border border-slate-200 p-4 rounded-xl shadow-xs">
+          <div class="text-2xl font-black text-cyan-700">6,800 hrs/yr</div>
+          <div class="text-[11px] text-slate-500 font-medium mt-1">Staff Capacity Multiplied</div>
+        </div>
+        <div class="bg-white border border-slate-200 p-4 rounded-xl shadow-xs">
+          <div class="text-2xl font-black text-blue-700">+4 FTEs</div>
+          <div class="text-[11px] text-slate-500 font-medium mt-1">Mission Equivalence</div>
+        </div>
+        <div class="bg-white border border-slate-200 p-4 rounded-xl shadow-xs">
+          <div class="text-2xl font-black text-purple-700">140,000</div>
+          <div class="text-[11px] text-slate-500 font-medium mt-1">Lives Impacted</div>
+        </div>
+      </div>
+
+      <div class="pt-4 flex items-center gap-4">
+        <a href="./dashboard.html" target="_blank" class="px-6 py-3 rounded-xl bg-cyan-600 hover:bg-cyan-700 font-bold text-white text-sm shadow-md transition">
+          🚀 Explore Interactive Dashboard
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Speaker Notes Drawer (Toggled by Button) -->
+  <aside id="speaker-notes" class="hidden max-w-6xl mx-auto w-full px-6 mb-4">
+    <div class="bg-white border border-slate-200 p-5 rounded-2xl text-xs space-y-2 text-slate-700 shadow-md">
+      <div class="flex items-center justify-between text-cyan-800 font-bold uppercase tracking-wider">
+        <span>🎙️ Script & Talking Points for Current Slide</span>
+        <span id="notes-slide-title">Slide 1 Notes</span>
+      </div>
+      <p id="notes-content" class="leading-relaxed text-slate-700 text-sm">
+        "Good morning judges and leadership. Today, we're presenting: Reimagining WaterAid Canada with AI and Open-Source—a practical blueprint to break the non-profit administrative trap."
+      </p>
+    </div>
+  </aside>
+
+  <!-- Bottom Navigation Bar -->
+  <footer class="border-t border-slate-200 bg-white/95 px-6 py-4 flex items-center justify-between shadow-sm">
+    <button onclick="prevSlide()" class="px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-xs font-semibold text-slate-800 transition flex items-center gap-2 border border-slate-200">
+      <span>◀ Previous</span>
+    </button>
+
+    <div class="flex gap-2">
+      <!-- Slide Dots -->
+      <span class="w-2.5 h-2.5 rounded-full bg-cyan-600 dot" data-dot="1"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-slate-300 dot" data-dot="2"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-slate-300 dot" data-dot="3"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-slate-300 dot" data-dot="4"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-slate-300 dot" data-dot="5"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-slate-300 dot" data-dot="6"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-slate-300 dot" data-dot="7"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-slate-300 dot" data-dot="8"></span>
+    </div>
+
+    <button onclick="nextSlide()" class="px-5 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-700 text-xs font-semibold text-white transition flex items-center gap-2 shadow-sm">
+      <span>Next ▶</span>
+    </button>
+  </footer>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 8;
+
+    const speakerScripts = {
+      1: "Good morning judges and members of the panel. WaterAid Canada has a profound mandate: bringing clean water and sanitation to millions. But like every high-performing charity, its growth is constrained by an administrative ceiling. Today, we present our 3-year operating blueprint: Reimagining WaterAid Canada with AI and Open-Source—multiplying our mission capacity by 4.2x while saving $105,000 in software fees.",
+      2: "Let's begin with the current truth. WaterAid Canada is an elite, lean organization. Our team mobilizes philanthropic capital in Canada, stewards federal grants with Global Affairs Canada, and collaborates across an autonomous international federation. Our people are world-class experts in water security and diplomacy. But their time is increasingly stolen by administrative overhead.",
+      3: "Here is the heart of the problem: the Non-Profit Scaling Paradox. Right now, to raise more money and manage more grants, we are forced to spend $48,000 a year on rigid proprietary software like Blackbaud, while our staff spend 15 hours a week copy-pasting numbers between spreadsheets and PDFs. Donors strictly restrict administrative overhead spending, so we cannot simply hire our way out of this trap.",
+      4: "Here is our vision: what if we took the money spent on software licenses and reinvested it directly into clean water? By deploying open-source Odoo hosted right here in Canada, we eliminate software rent entirely. And by placing an AI orchestration layer on top, our staff gain an intelligent digital co-pilot that drafts reports and reconciles compliance in seconds.",
+      5: "Here are the components. On the left, we configure the 11 targeted Odoo modules circled in cyan—from CRM and Subscriptions for donors, to Documents and Sign for grant agreements, and Field Service for water points. In the middle, our AI agents handle the heavy data synthesis. And on the right is our ironclad rule: humans always hold the keys. AI never sends an email or files a grant. Staff retain 100% sign-off authority.",
+      6: "This is not just theory—here is our live working proof: the Impact-to-Donor Synthesizer. It ingests messy inspection tickets from Kijana District and drafts a personalized donor report. Notice the green badges: when leadership or a donor clicks any number, it instantly displays the exact technician signature and water test timestamp. 100% provenance, zero hallucinations.",
+      7: "We deliver this through a disciplined 3-year roadmap. Year 1 focuses on the Odoo foundation and donor pilot. Year 2 integrates federal GAC grant compliance. Year 3 expands to full operations and publishes an open federation API mesh. Most importantly, we establish strict mathematical gates at Month 6, 18, and 30. If accuracy ever dips below 88%, the pipeline halts. Leadership is always in control.",
+      8: "In conclusion, this blueprint saves $105,000 in cash and gives our team the capacity of 4 additional senior specialists—empowering WaterAid Canada to bring clean water to 140,000 more people over the next 3 years. It is practical, open-source, and ready to deploy. Thank you."
+    };
+
+    function showSlide(index) {
+      if (index < 1 || index > totalSlides) return;
+      currentSlide = index;
+
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      const activeSlide = document.querySelector(`.slide[data-slide="${index}"]`);
+      if (activeSlide) activeSlide.classList.add('active');
+
+      document.getElementById('slide-indicator').textContent = `Slide ${index} of ${totalSlides}`;
+
+      document.querySelectorAll('.dot').forEach(d => {
+        if (parseInt(d.dataset.dot) === index) {
+          d.className = 'w-2.5 h-2.5 rounded-full bg-cyan-600 dot';
+        } else {
+          d.className = 'w-2.5 h-2.5 rounded-full bg-slate-300 dot';
+        }
+      });
+
+      document.getElementById('notes-slide-title').textContent = `Slide ${index} Notes`;
+      document.getElementById('notes-content').textContent = speakerScripts[index] || '';
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) showSlide(currentSlide - 1);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    function toggleNotes() {
+      const drawer = document.getElementById('speaker-notes');
+      const btn = document.getElementById('notes-toggle-btn');
+      if (drawer.classList.contains('hidden')) {
+        drawer.classList.remove('hidden');
+        btn.classList.add('bg-cyan-100', 'text-cyan-800', 'border-cyan-300');
+      } else {
+        drawer.classList.add('hidden');
+        btn.classList.remove('bg-cyan-100', 'text-cyan-800', 'border-cyan-300');
+      }
+    }
+
+    let timeLeft = 300;
+    let timerRunning = false;
+    let timerInterval = null;
+
+    function toggleTimer() {
+      const btn = document.getElementById('timer-btn');
+      if (timerRunning) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        btn.textContent = '▶';
+      } else {
+        timerRunning = true;
+        btn.textContent = '⏸';
+        timerInterval = setInterval(() => {
+          if (timeLeft > 0) {
+            timeLeft--;
+            const mins = Math.floor(timeLeft / 60);
+            const secs = timeLeft % 60;
+            document.getElementById('timer-display').textContent = 
+              `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+          } else {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            document.getElementById('timer-display').textContent = "00:00 (TIME)";
+            document.getElementById('timer-display').classList.add('text-red-600');
+          }
+        }, 1000);
+      }
+    }
+  </script>
+</body>
+</html>
