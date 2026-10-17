@@ -193,8 +193,14 @@ The hackathon explicitly outlines a stretch goal: *"Identify capabilities that f
 
 ### The "WaterAid Open Non-Profit Distribution"
 Because Odoo is open-source, WaterAid Canada does **not** need to force other autonomous members (WaterAid UK, Sweden, Japan, Country Programmes) to adopt their systems. Instead:
-1. **Open-Source Module Repository:** WaterAid Canada publishes their pre-configured Odoo modules (e.g., `wateraid_wash_impact`, `wateraid_donor_crm`, `wateraid_gac_reporting`) as free, open-source packages on GitHub.
+1. **Open-Source Module Repository:** WaterAid Canada publishes their pre-configured Odoo modules (e.g., `addons/wateraid_fundraising`, `wateraid_wash_impact`, `wateraid_gac_reporting`) as free, open-source packages on GitHub.
 2. **Federated API Data Mesh:** Country Programmes and global chapters can optionally expose standardized, read-only JSON endpoints to share water point KPIs across borders without abandoning their local tools.
+
+### 7.1 Canadian Sector Leadership: The Open Non-Profit Commons
+Beyond the global federation, open-sourcing `addons/wateraid_fundraising` establishes WaterAid Canada as a **national digital leader for Canada's 86,000 registered charities**:
+* **Liberating Charities from US SaaS Rent:** Canadian non-profits spend tens of millions annually on US proprietary software (Blackbaud, Salesforce) primarily to comply with complex **CRA Regulation 3501** tax receipt rules. WaterAid's open-source module provides an out-of-the-box, audit-compliant alternative that any Canadian charity can run for free.
+* **Co-Investment & Civic Tech Coalition:** Instead of each charity paying separate software vendors, Canadian peers (e.g., MSF Canada, Oxfam Canada, local foundations) can co-invest in a single shared GitHub repository, supported by civic tech volunteers (Civic Tech Toronto, Hackworks).
+* **Digital Public Goods (DPG) Innovation Grants:** By releasing non-profit infrastructure as an open-source public good, WaterAid Canada becomes eligible for major philanthropic tech grants (Mozilla Foundation, McConnell Foundation, CanCode) that are inaccessible to closed proprietary consumers.
 
 ---
 

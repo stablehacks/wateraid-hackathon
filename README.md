@@ -23,9 +23,9 @@ By pairing an **open-source operational core (Odoo Community)** self-hosted in C
 
 | Resource | File | Description |
 | :--- | :--- | :--- |
-| 📊 **Executive Pitch Deck** | [`pitch_deck.html`](pitch_deck.html) *(or [`index.html`](index.html))* | Interactive 8-slide presentation with 5-minute timer, keyboard navigation, and speaker scripts. |
+| 📊 **Executive Pitch Deck** | [`pitch_deck.html`](pitch_deck.html) *(or [`index.html`](index.html))* | Interactive 10-slide presentation with 5-minute timer, keyboard navigation, speaker scripts, and Canadian sector leadership strategy. |
 | 🖥️ **Working Prototype** | [`dashboard.html`](dashboard.html) | Interactive web dashboard demonstrating Odoo field ticket ingestion and clickable citation verification. |
-| 📄 **Full Technical Proposal** | [`PROPOSAL.md`](PROPOSAL.md) | Comprehensive 3-year Systems Blueprint, architectural specifications, and gating criteria. |
+| 📄 **Full Technical Proposal** | [`PROPOSAL.md`](PROPOSAL.md) | Comprehensive 3-year Systems Blueprint, architectural specifications, Canadian sector leadership model, and gating criteria. |
 | 💰 **3-Way Cost Analysis Addendum** | [`ADDENDUM_COST_ANALYSIS.md`](ADDENDUM_COST_ANALYSIS.md) | Detailed comparison: Current Proprietary Stack ($87.5k/yr) vs. Odoo Hosted ($8.4k/yr) vs. Self-Hosted ($13.6k/yr). |
 | 🧩 **Odoo Module Map** | [`odoo_highlighted_modules.png`](odoo_highlighted_modules.png) | Visual layout of the 11 targeted Odoo modules configured for WaterAid Canada. |
 | 📦 **Custom Odoo Module** | [`addons/wateraid_fundraising/`](addons/wateraid_fundraising/) | Production-ready open-source Odoo 17/18 module: CRA Reg. 3501 tax receipts, CFAP designations, pledges, and AI stewardship. |
