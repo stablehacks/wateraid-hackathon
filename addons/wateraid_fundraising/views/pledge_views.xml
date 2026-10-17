@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_wateraid_pledge_tree" model="ir.ui.view">
+        <field name="name">wateraid.pledge.tree</field>
+        <field name="model">wateraid.pledge</field>
+        <field name="arch" type="xml">
+            <tree string="Pledges" decoration-success="state == 'fulfilled'">
+                <field name="name"/>
+                <field name="donor_id"/>
+                <field name="fund_id"/>
+                <field name="total_amount" sum="Total Pledged"/>
+                <field name="paid_amount" sum="Total Paid"/>
+                <field name="balance_amount" sum="Total Balance"/>
+                <field name="state" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_wateraid_pledge_form" model="ir.ui.view">
+        <field name="name">wateraid.pledge.form</field>
+        <field name="model">wateraid.pledge</field>
+        <field name="arch" type="xml">
+            <form string="Major Gift Pledge">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="active,fulfilled"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group string="Donor &amp; Fund">
+                            <field name="donor_id"/>
+                            <field name="campaign_id"/>
+                            <field name="fund_id"/>
+                        </group>
+                        <group string="Pledge Financials">
+                            <field name="total_amount" widget="monetary"/>
+                            <field name="paid_amount" widget="monetary"/>
+                            <field name="balance_amount" widget="monetary" class="oe_subtotal_footer_separator font-weight-bold"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Installment Schedule">
+                            <field name="installment_ids">
+                                <tree editable="bottom">
+                                    <field name="due_date"/>
+                                    <field name="amount" sum="Total Installments"/>
+                                    <field name="donation_id"/>
+                                    <field name="state" widget="badge"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

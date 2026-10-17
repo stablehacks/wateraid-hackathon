@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add Non-Profit Giving Tab to res.partner Form View -->
+    <record id="view_partner_form_fundraising_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.fundraising.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]" position="inside">
+                <div class="oe_edit_only">
+                    <field name="is_household"/> <label for="is_household" string="Household Account"/>
+                </div>
+            </xpath>
+
+            <xpath expr="//notebook" position="inside">
+                <page string="Non-Profit Giving (Raiser's Edge Parity)" name="fundraising_tab">
+                    <group>
+                        <group string="Giving Overview">
+                            <field name="donor_tier" widget="badge"/>
+                            <field name="lifetime_giving_amount" widget="monetary"/>
+                            <field name="largest_gift_amount" widget="monetary"/>
+                            <field name="total_gift_count"/>
+                            <field name="preferred_wash_cause"/>
+                        </group>
+                        <group string="Giving Timeline &amp; Lapsed Analytics">
+                            <field name="first_gift_date"/>
+                            <field name="last_gift_date"/>
+                            <field name="is_lybunt" widget="boolean_toggle"/>
+                            <field name="is_sybunt" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Donations (Hard Credit)">
+                            <field name="donation_ids" readonly="1">
+                                <tree string="Donations">
+                                    <field name="name"/>
+                                    <field name="donation_date"/>
+                                    <field name="fund_id"/>
+                                    <field name="amount" sum="Total"/>
+                                    <field name="eligible_amount"/>
+                                    <field name="receipt_status" widget="badge"/>
+                                    <field name="state" widget="badge"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Pledges &amp; Commitments">
+                            <field name="pledge_ids" readonly="1">
+                                <tree string="Pledges">
+                                    <field name="name"/>
+                                    <field name="fund_id"/>
+                                    <field name="total_amount"/>
+                                    <field name="paid_amount"/>
+                                    <field name="balance_amount"/>
+                                    <field name="state" widget="badge"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Search View Filter for LYBUNT and Major Donors -->
+    <record id="view_res_partner_filter_fundraising_inherit" model="ir.ui.view">
+        <field name="name">res.partner.select.fundraising.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='type_person']" position="before">
+                <filter string="LYBUNT Donors (Gave Last Year, Not This)" name="filter_lybunt" domain="[('is_lybunt', '=', True)]"/>
+                <filter string="SYBUNT Donors (Lapsed Multi-Year)" name="filter_sybunt" domain="[('is_sybunt', '=', True)]"/>
+                <filter string="Major Donors ($5,000+)" name="filter_major_donors" domain="[('donor_tier', 'in', ['major', 'principal'])]"/>
+                <separator/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

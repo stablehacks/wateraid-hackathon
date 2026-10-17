@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_cra_tax_receipt_tree" model="ir.ui.view">
+        <field name="name">cra.tax.receipt.tree</field>
+        <field name="model">cra.tax.receipt</field>
+        <field name="arch" type="xml">
+            <tree string="CRA Tax Receipts" decoration-muted="state == 'cancelled'" decoration-warning="state == 'reissued'">
+                <field name="name"/>
+                <field name="receipt_date"/>
+                <field name="donor_id"/>
+                <field name="gross_amount" sum="Gross Total"/>
+                <field name="advantage_amount"/>
+                <field name="eligible_amount" sum="Eligible Total"/>
+                <field name="tax_year"/>
+                <field name="state" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_cra_tax_receipt_form" model="ir.ui.view">
+        <field name="name">cra.tax.receipt.form</field>
+        <field name="model">cra.tax.receipt</field>
+        <field name="arch" type="xml">
+            <form string="Official CRA Tax Receipt">
+                <header>
+                    <button name="action_reissue_receipt" string="Re-Issue (Replacement Receipt)" type="object" class="btn-warning" invisible="state != 'issued'"/>
+                    <button name="action_cancel_receipt" string="Cancel Receipt" type="object" class="btn-danger" invisible="state == 'cancelled'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="issued,reissued,cancelled"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <span class="text-muted">Canada Revenue Agency Official Donation Receipt</span>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group string="Donor Information (Reg. 3501)">
+                            <field name="donor_id"/>
+                            <field name="donor_address"/>
+                        </group>
+                        <group string="Charity Registration Details">
+                            <field name="charity_name"/>
+                            <field name="charity_bn"/>
+                            <field name="charity_address"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Financials">
+                            <field name="gross_amount" widget="monetary"/>
+                            <field name="advantage_amount" widget="monetary"/>
+                            <field name="eligible_amount" widget="monetary" class="oe_subtotal_footer_separator font-weight-bold"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                        <group string="Dates &amp; Audit Trail">
+                            <field name="receipt_date"/>
+                            <field name="gift_date"/>
+                            <field name="tax_year"/>
+                            <field name="replaces_receipt_id" invisible="not replaces_receipt_id"/>
+                            <field name="cancellation_reason" invisible="state != 'cancelled'"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

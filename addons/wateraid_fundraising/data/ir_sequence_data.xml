@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Sequential CRA Tax Receipt Numbering (Reg. 3501 Compliant) -->
+        <record id="seq_cra_tax_receipt" model="ir.sequence">
+            <field name="name">CRA Official Tax Receipt Sequence</field>
+            <field name="code">cra.tax.receipt</field>
+            <field name="prefix">WAC-%(range_y)s-</field>
+            <field name="padding">6</field>
+            <field name="use_date_range">True</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Donation Reference Sequence -->
+        <record id="seq_wateraid_donation" model="ir.sequence">
+            <field name="name">WaterAid Donation Sequence</field>
+            <field name="code">wateraid.donation</field>
+            <field name="prefix">DON-%(range_y)s-</field>
+            <field name="padding">5</field>
+            <field name="use_date_range">True</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Pledge Reference Sequence -->
+        <record id="seq_wateraid_pledge" model="ir.sequence">
+            <field name="name">WaterAid Pledge Sequence</field>
+            <field name="code">wateraid.pledge</field>
+            <field name="prefix">PLG-%(range_y)s-</field>
+            <field name="padding">5</field>
+            <field name="use_date_range">True</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

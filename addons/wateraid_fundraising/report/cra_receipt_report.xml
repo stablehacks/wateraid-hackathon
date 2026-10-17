@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_cra_receipt" model="ir.actions.report">
+        <field name="name">Official CRA Tax Receipt (PDF)</field>
+        <field name="model">cra.tax.receipt</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">wateraid_fundraising.report_cra_receipt_document</field>
+        <field name="report_file">wateraid_fundraising.report_cra_receipt_document</field>
+        <field name="binding_model_id" ref="model_cra_tax_receipt"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_cra_receipt_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page" style="font-family: Arial, sans-serif; font-size: 13px; color: #1e293b;">
+                        <div style="border-bottom: 2px solid #0891b2; padding-bottom: 12px; margin-bottom: 20px;">
+                            <h2 style="color: #0891b2; margin: 0; font-size: 22px; font-weight: bold;">WaterAid Canada</h2>
+                            <p style="margin: 2px 0; font-size: 11px; color: #64748b;">Canada Revenue Agency Official Donation Receipt for Income Tax Purposes</p>
+                        </div>
+
+                        <table style="width: 100%; margin-bottom: 25px; border-collapse: collapse;">
+                            <tr>
+                                <td style="width: 50%; vertical-align: top; padding-right: 15px;">
+                                    <strong>Charity Information:</strong><br/>
+                                    <span t-field="o.charity_name"/><br/>
+                                    <strong>Charity BN/Registration:</strong> <span t-field="o.charity_bn"/><br/>
+                                    <span t-field="o.charity_address"/>
+                                </td>
+                                <td style="width: 50%; vertical-align: top; padding-left: 15px; border-left: 1px solid #e2e8f0;">
+                                    <strong>Official Receipt Number:</strong> <span style="font-size: 15px; font-weight: bold; color: #0891b2;" t-field="o.name"/><br/>
+                                    <strong>Date Issued:</strong> <span t-field="o.receipt_date"/><br/>
+                                    <strong>Date Received:</strong> <span t-field="o.gift_date"/><br/>
+                                    <strong>Tax Year:</strong> <span t-field="o.tax_year"/><br/>
+                                    <t t-if="o.replaces_receipt_id">
+                                        <span style="color: #dc2626; font-weight: bold;">Replaces Cancelled Receipt: </span><span t-field="o.replaces_receipt_id.name"/><br/>
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-bottom: 25px;">
+                            <strong>Donor (Taxpayer):</strong><br/>
+                            <span style="font-size: 15px; font-weight: bold;" t-field="o.donor_id.name"/><br/>
+                            <span t-field="o.donor_address"/>
+                        </div>
+
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                            <thead>
+                                <tr style="background-color: #0891b2; color: #ffffff;">
+                                    <th style="padding: 10px; text-align: left;">Description</th>
+                                    <th style="padding: 10px; text-align: right;">Amount (CAD)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 10px;">Total Amount Received (Gross Gift)</td>
+                                    <td style="padding: 10px; text-align: right;"><span t-field="o.gross_amount" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #e2e8f0;">
+                                    <td style="padding: 10px;">Value of Advantage / Benefit Provided to Donor</td>
+                                    <td style="padding: 10px; text-align: right;">- <span t-field="o.advantage_amount" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+                                </tr>
+                                <tr style="background-color: #f0fdfa; font-size: 15px; font-weight: bold;">
+                                    <td style="padding: 12px; color: #0891b2;">Eligible Amount of Gift for Tax Purposes</td>
+                                    <td style="padding: 12px; text-align: right; color: #0891b2;"><span t-field="o.eligible_amount" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div style="margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="width: 60%; font-size: 10px; color: #64748b; line-height: 1.4;">
+                                        For information on all registered charities in Canada under the Income Tax Act, please visit the Canada Revenue Agency website at: <strong>canada.ca/charities-giving</strong>.
+                                    </td>
+                                    <td style="width: 40%; text-align: right;">
+                                        <div style="font-weight: bold; font-size: 12px;"><span t-field="o.authorized_signatory"/></div>
+                                        <div style="font-size: 11px; color: #64748b;">Authorized Signature</div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

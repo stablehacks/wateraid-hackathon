@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Top Level Menu -->
+    <menuitem id="menu_wateraid_fundraising_root"
+              name="Fundraising (WAC)"
+              sequence="20"
+              web_icon="wateraid_fundraising,static/description/icon.png"/>
+
+    <!-- Sub-menus -->
+    <menuitem id="menu_wateraid_donations"
+              name="Donations &amp; Gifts"
+              parent="menu_wateraid_fundraising_root"
+              sequence="10"/>
+
+    <menuitem id="menu_wateraid_donors"
+              name="Donors &amp; Constituents"
+              parent="menu_wateraid_fundraising_root"
+              sequence="20"/>
+
+    <menuitem id="menu_wateraid_designations"
+              name="Designations (CFAP)"
+              parent="menu_wateraid_fundraising_root"
+              sequence="30"/>
+
+    <menuitem id="menu_wateraid_cra"
+              name="CRA Tax Receipts"
+              parent="menu_wateraid_fundraising_root"
+              sequence="40"/>
+
+    <!-- Actions -->
+    <record id="action_wateraid_donations" model="ir.actions.act_window">
+        <field name="name">Donations</field>
+        <field name="res_model">wateraid.donation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_wateraid_pledges" model="ir.actions.act_window">
+        <field name="name">Pledges &amp; Commitments</field>
+        <field name="res_model">wateraid.pledge</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_wateraid_constituents" model="ir.actions.act_window">
+        <field name="name">Constituents &amp; Donors</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{'search_default_filter_major_donors': 0}</field>
+    </record>
+
+    <record id="action_wateraid_cra_receipts" model="ir.actions.act_window">
+        <field name="name">Official CRA Tax Receipts</field>
+        <field name="res_model">cra.tax.receipt</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_wateraid_campaigns" model="ir.actions.act_window">
+        <field name="name">Campaigns</field>
+        <field name="res_model">fundraising.campaign</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_wateraid_funds" model="ir.actions.act_window">
+        <field name="name">Designated Funds</field>
+        <field name="res_model">fundraising.fund</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Links -->
+    <menuitem id="menu_action_wateraid_donations" parent="menu_wateraid_donations" action="action_wateraid_donations" sequence="10"/>
+    <menuitem id="menu_action_wateraid_pledges" parent="menu_wateraid_donations" action="action_wateraid_pledges" sequence="20"/>
+    <menuitem id="menu_action_wateraid_constituents" parent="menu_wateraid_donors" action="action_wateraid_constituents" sequence="10"/>
+    <menuitem id="menu_action_wateraid_cra_receipts" parent="menu_wateraid_cra" action="action_wateraid_cra_receipts" sequence="10"/>
+    <menuitem id="menu_action_wateraid_campaigns" parent="menu_wateraid_designations" action="action_wateraid_campaigns" sequence="10"/>
+    <menuitem id="menu_action_wateraid_funds" parent="menu_wateraid_designations" action="action_wateraid_funds" sequence="20"/>
+</odoo>

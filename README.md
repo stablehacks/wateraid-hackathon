@@ -5,6 +5,7 @@
 [![Track](https://img.shields.io/badge/Track-C%3A%20Systems%20Blueprint-blue.svg)](https://theaifellowship.ca/c/wateraid)
 [![Stack](https://img.shields.io/badge/Core-Odoo%20Open--Source%20%2B%20AI%20Orchestration-cyan.svg)](odoo_highlighted_modules.png)
 [![Governance](https://img.shields.io/badge/Governance-100%25%20Human--in--the--Loop-amber.svg)](dashboard.html)
+[![Addon](https://img.shields.io/badge/Odoo%20Module-wateraid__fundraising-purple.svg)](addons/wateraid_fundraising/)
 
 ---
 
@@ -26,6 +27,33 @@ By pairing an **open-source operational core (Odoo Community)** self-hosted in C
 | 🖥️ **Working Prototype** | [`dashboard.html`](dashboard.html) | Interactive web dashboard demonstrating Odoo field ticket ingestion and clickable citation verification. |
 | 📄 **Full Technical Proposal** | [`PROPOSAL.md`](PROPOSAL.md) | Comprehensive 3-year Systems Blueprint, architectural specifications, and gating criteria. |
 | 🧩 **Odoo Module Map** | [`odoo_highlighted_modules.png`](odoo_highlighted_modules.png) | Visual layout of the 11 targeted Odoo modules configured for WaterAid Canada. |
+| 📦 **Custom Odoo Module** | [`addons/wateraid_fundraising/`](addons/wateraid_fundraising/) | Production-ready open-source Odoo 17/18 module: CRA Reg. 3501 tax receipts, CFAP designations, pledges, and AI stewardship. |
+
+---
+
+## 📦 The `wateraid_fundraising` Odoo Module
+
+Located in [`addons/wateraid_fundraising/`](addons/wateraid_fundraising/), this custom module delivers full feature-parity with Blackbaud Raiser's Edge:
+
+1. **Constituent & Household Records (Hard vs. Soft Credit):**
+   * Extends `res.partner` with household accounts, spouses, family foundation trustees, and relationship links.
+   * Hard Credit for official tax receipt recipients; Soft Credit for relationship/influencer recognition.
+2. **CRA Regulation 3501 Tax Receipts:**
+   * Automated sequential receipt numbering (`WAC-2026-000001`).
+   * Advantage deduction (e.g., Gala ticket price minus meal value).
+   * CRA-mandated replacement tracking (`"Replaces cancelled receipt #WAC-..."`).
+   * Audit-ready QWeb PDF tax receipts with official signature and charity registration number (`119287595 RR 0001`).
+3. **CFAP Fundraising Designation Hierarchy:**
+   * **Campaign:** Overarching strategic initiative (e.g. *Clean Water 2026–2029*).
+   * **Fund:** Restricted vs. Unrestricted fund tracking linked directly to Odoo analytical accounting.
+   * **Appeal:** Channel performance tracking (Direct Mail, Gala, Email).
+4. **Multi-Year Pledges & Installments:**
+   * Automated installment schedules, overdue alerts, and fulfillment tracking (`wateraid.pledge`).
+5. **LYBUNT / SYBUNT Analytics:**
+   * Pre-computed giving statistics: Lifetime Total, First Gift, Largest Gift, Consecutive Years.
+   * Native search filters for *Last Year But Unfortunately Not This* (LYBUNT) lapsed donors.
+6. **AI Field-to-Donor Bridge:**
+   * Action hook connecting `Odoo Field Service` water point repair tickets to automated, citation-backed donor stewardship briefs.
 
 ---
 
@@ -49,16 +77,6 @@ By pairing an **open-source operational core (Odoo Community)** self-hosted in C
 │   CRM • Subscriptions • Documents • Sign • Project • Field Service • Acct   │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
-### The 11 Targeted Odoo Modules
-Rather than a generic commercial ERP overhaul, the blueprint configures 11 specific open-source Odoo modules:
-1. **CRM & Subscriptions:** Major gift pipelines, institutional partnerships, and recurring donor stewardship.
-2. **Documents & Sign:** Multilateral grant agreements (GAC) and digital audit-ready sign-offs.
-3. **Project & Field Service:** WASH infrastructure delivery milestones and water point maintenance tickets.
-4. **Accounting:** Restricted fund accounting, audit readiness, and general ledger reconciliation.
-5. **Email Marketing:** Adaptive, AI-personalized fundraising appeal campaigns.
-6. **Knowledge & HR:** SOP archives, research papers, and staff AI literacy tracking.
-7. **Dashboard:** Executive and Board of Directors real-time intelligence summaries.
 
 ---
 
@@ -110,4 +128,4 @@ Reputation and trust are non-negotiable for an international development charity
 ## 📄 License & Attribution
 
 Developed as a submission for **The Foundry Vol. I: Water Hackathon (The AI Fellowship Toronto Chapter in support of WaterAid Canada)**.  
-Open-source under the MIT License.
+Open-source under the MIT / AGPL-3 License.

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_wateraid_donation_tree" model="ir.ui.view">
+        <field name="name">wateraid.donation.tree</field>
+        <field name="model">wateraid.donation</field>
+        <field name="arch" type="xml">
+            <tree string="Donations" decoration-success="state == 'receipted'" decoration-info="state == 'confirmed'">
+                <field name="name"/>
+                <field name="donation_date"/>
+                <field name="donor_id"/>
+                <field name="fund_id"/>
+                <field name="amount" sum="Total Gross"/>
+                <field name="eligible_amount" sum="Total Eligible"/>
+                <field name="tax_receipt_id"/>
+                <field name="receipt_status" widget="badge"/>
+                <field name="state" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_wateraid_donation_form" model="ir.ui.view">
+        <field name="name">wateraid.donation.form</field>
+        <field name="model">wateraid.donation</field>
+        <field name="arch" type="xml">
+            <form string="Donation Record">
+                <header>
+                    <button name="action_confirm_donation" string="Confirm &amp; Deposit" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_generate_cra_receipt" string="Issue CRA Tax Receipt" type="object" class="oe_highlight" invisible="state != 'confirmed'"/>
+                    <button name="action_generate_ai_stewardship_brief" string="✨ Generate AI Stewardship Brief" type="object" class="btn-info" invisible="state not in ('confirmed', 'receipted')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,receipted"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group string="Donor &amp; Credit Allocation">
+                            <field name="donor_id" widget="res_partner_many2one"/>
+                            <field name="soft_credit_id"/>
+                            <field name="donation_date"/>
+                            <field name="payment_method"/>
+                        </group>
+                        <group string="Non-Profit Fund Designation">
+                            <field name="campaign_id"/>
+                            <field name="fund_id"/>
+                            <field name="appeal_id"/>
+                            <field name="linked_project_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Gift Amount &amp; CRA Advantage">
+                            <field name="amount" widget="monetary"/>
+                            <field name="advantage_amount" widget="monetary"/>
+                            <field name="eligible_amount" widget="monetary" class="oe_subtotal_footer_separator"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                        <group string="Official CRA Tax Receipt">
+                            <field name="tax_receipt_id"/>
+                            <field name="receipt_status" widget="badge"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="AI Field-to-Donor Stewardship Brief" invisible="not ai_stewardship_brief">
+                            <div class="alert alert-success" role="alert" invisible="not ai_provenance_verified">
+                                🛡️ <strong>Provenance Verified:</strong> Figures connected directly to field service inspection logs with zero hallucination.
+                            </div>
+                            <field name="ai_stewardship_brief"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

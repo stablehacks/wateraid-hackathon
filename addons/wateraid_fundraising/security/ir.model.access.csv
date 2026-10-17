@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fundraising_campaign_user,fundraising.campaign.user,model_fundraising_campaign,group_fundraising_user,1,1,1,0
+access_fundraising_campaign_mgr,fundraising.campaign.mgr,model_fundraising_campaign,group_fundraising_manager,1,1,1,1
+access_fundraising_fund_user,fundraising.fund.user,model_fundraising_fund,group_fundraising_user,1,1,1,0
+access_fundraising_fund_mgr,fundraising.fund.mgr,model_fundraising_fund,group_fundraising_manager,1,1,1,1
+access_fundraising_appeal_user,fundraising.appeal.user,model_fundraising_appeal,group_fundraising_user,1,1,1,0
+access_fundraising_appeal_mgr,fundraising.appeal.mgr,model_fundraising_appeal,group_fundraising_manager,1,1,1,1
+access_wateraid_donation_user,wateraid.donation.user,model_wateraid_donation,group_fundraising_user,1,1,1,0
+access_wateraid_donation_mgr,wateraid.donation.mgr,model_wateraid_donation,group_fundraising_manager,1,1,1,1
+access_cra_tax_receipt_user,cra.tax.receipt.user,model_cra_tax_receipt,group_fundraising_user,1,0,0,0
+access_cra_tax_receipt_mgr,cra.tax.receipt.mgr,model_cra_tax_receipt,group_fundraising_manager,1,1,1,0
+access_wateraid_pledge_user,wateraid.pledge.user,model_wateraid_pledge,group_fundraising_user,1,1,1,0
+access_wateraid_pledge_mgr,wateraid.pledge.mgr,model_wateraid_pledge,group_fundraising_manager,1,1,1,1
+access_wateraid_pledge_installment_user,wateraid.pledge.installment.user,model_wateraid_pledge_installment,group_fundraising_user,1,1,1,0
+access_wateraid_pledge_installment_mgr,wateraid.pledge.installment.mgr,model_wateraid_pledge_installment,group_fundraising_manager,1,1,1,1
