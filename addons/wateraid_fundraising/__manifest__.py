@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'WaterAid Canada — Non-Profit Fundraising & Donor Management',
-    'version': '17.0.1.0.0',
+    'version': '17.0.1.0.1',
     'category': 'Non-Profit / Fundraising',
     'summary': 'Constituent management, CRA Regulation 3501 tax receipts, CFAP designations, and AI field-to-donor stewardship.',
     'description': """
