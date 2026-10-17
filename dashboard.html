@@ -341,35 +341,100 @@ models.execute_kw(<code class="text-emerald-400">'wateraid_prod'</code>, uid, OD
     <!-- ========================================== -->
     <section id="panel-calculator" class="hidden space-y-6">
       <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-        <h3 class="text-lg font-bold text-slate-900 mb-1">Economic Durability & Capacity ROI Model</h3>
-        <p class="text-sm text-slate-500 mb-6">Compare the 3-year accelerated operational cost of proprietary vendor lock-in against the Open-Source Blueprint.</p>
+        <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 mb-6 border-b border-slate-100 gap-4">
+          <div>
+            <h3 class="text-lg font-bold text-slate-900 mb-1">Financial Addendum: 3-Way Cost Analysis (20 Users)</h3>
+            <p class="text-sm text-slate-500">Comprehensive comparison between fragmented commercial SaaS, Odoo Hosted SaaS, and our Self-Hosted AI Blueprint.</p>
+          </div>
+          <span class="text-xs bg-cyan-50 text-cyan-800 border border-cyan-200 px-3 py-1 rounded-full font-bold">20-User Benchmark</span>
+        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-slate-50 p-5 rounded-xl border border-red-200">
-            <span class="text-xs uppercase font-bold text-red-700">Legacy Proprietary SaaS</span>
-            <div class="text-3xl font-black text-slate-900 mt-1">$280,000</div>
-            <p class="text-xs text-slate-600 mt-2">3-Year cost of Blackbaud / Raiser's Edge licenses, add-on modules, and steep per-record fees.</p>
-            <div class="mt-4 pt-3 border-t border-slate-200 text-xs text-red-700 font-medium">
-              ⚠️ High donor restriction friction; zero capacity multiplication.
+        <!-- 3-Way Comparison Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <!-- Card 1: Current State -->
+          <div class="bg-slate-50 p-5 rounded-2xl border border-red-200 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs uppercase font-extrabold text-red-700 bg-red-100/70 px-2 py-0.5 rounded">1. Current State of Play</span>
+                <span class="text-xs font-mono text-slate-400">8 Logins</span>
+              </div>
+              <div class="text-3xl font-black text-slate-900">CA$87,458</div>
+              <div class="text-xs text-slate-500 font-medium">per year ($262,373 over 3 years)</div>
+              
+              <ul class="text-xs text-slate-600 space-y-1.5 mt-4 pt-3 border-t border-slate-200">
+                <li>• <strong>Blackbaud / Salesforce:</strong> $39,600/yr ($165/user)</li>
+                <li>• <strong>DocuSign &amp; Contracts:</strong> $9,120/yr ($38/user)</li>
+                <li>• <strong>Asana, Slack &amp; Notion:</strong> $11,544/yr</li>
+                <li>• <strong>QuickBooks &amp; Web CMS:</strong> $1,212/yr</li>
+                <li>• <strong>USD FX Conversion Buffer:</strong> $16,682/yr</li>
+              </ul>
+            </div>
+            <div class="mt-4 pt-3 border-t border-red-200 text-xs text-red-700 font-semibold">
+              ⚠️ 15 hrs/wk data re-entry; heavy overhead penalty.
             </div>
           </div>
 
-          <div class="bg-emerald-50/60 p-5 rounded-xl border border-emerald-200">
-            <span class="text-xs uppercase font-bold text-emerald-800">WaterAid Canada (Odoo Core + AI)</span>
-            <div class="text-3xl font-black text-emerald-800 mt-1">$105,000</div>
-            <p class="text-xs text-slate-600 mt-2">3-Year total cost of sovereign Canadian cloud, token inference, and open-source tech support.</p>
-            <div class="mt-4 pt-3 border-t border-emerald-200 text-xs text-emerald-800 font-bold">
-              💰 Direct Cash Savings: $175,000 (Reinvested in WASH)
+          <!-- Card 2: Odoo Hosted -->
+          <div class="bg-amber-50/50 p-5 rounded-2xl border border-amber-200 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs uppercase font-extrabold text-amber-800 bg-amber-100/70 px-2 py-0.5 rounded">2. Odoo Hosted (SaaS)</span>
+                <span class="text-xs font-mono text-amber-700 font-semibold">Turnkey Cloud</span>
+              </div>
+              <div class="text-3xl font-black text-slate-900">CA$8,448</div>
+              <div class="text-xs text-slate-500 font-medium">per year ($25,344 over 3 years)</div>
+
+              <ul class="text-xs text-slate-600 space-y-1.5 mt-4 pt-3 border-t border-amber-200">
+                <li>• <strong>All Odoo Apps for 20 users:</strong> $35.20/user/mo</li>
+                <li>• <strong>Instant Replacement:</strong> Replaces 8 subscriptions</li>
+                <li>• <strong>Zero Infrastructure Setup:</strong> Hosted by Odoo</li>
+                <li>• <strong>Managed Upgrades:</strong> Included automatically</li>
+                <li>• <strong>Direct Annual Cash Savings:</strong> <strong class="text-amber-800">CA$79,010/yr</strong></li>
+              </ul>
+            </div>
+            <div class="mt-4 pt-3 border-t border-amber-200 text-xs text-amber-800 font-semibold">
+              💡 90.3% cost reduction; global shared cloud.
             </div>
           </div>
 
-          <div class="bg-cyan-50/60 p-5 rounded-xl border border-cyan-200">
-            <span class="text-xs uppercase font-bold text-cyan-800">Staff Capacity Multiplier</span>
-            <div class="text-3xl font-black text-cyan-900 mt-1">6,800 hrs/yr</div>
-            <p class="text-xs text-slate-600 mt-2">Routine manual tasks eliminated across grant reporting, data entry, and donor receipts.</p>
-            <div class="mt-4 pt-3 border-t border-cyan-200 text-xs text-cyan-800 font-bold">
-              🚀 Equivalent to 4 full-time senior officers added to mission.
+          <!-- Card 3: Odoo Self-Hosted + AI -->
+          <div class="bg-emerald-50/60 p-5 rounded-2xl border border-emerald-300 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs uppercase font-extrabold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded">3. Self-Hosted + AI Blueprint</span>
+                <span class="text-xs font-mono text-emerald-700 font-bold">Recommended</span>
+              </div>
+              <div class="text-3xl font-black text-emerald-800">CA$13,620</div>
+              <div class="text-xs text-slate-500 font-medium">per year ($40,860 over 3 years)</div>
+
+              <ul class="text-xs text-slate-700 space-y-1.5 mt-4 pt-3 border-t border-emerald-200">
+                <li>• <strong>Core Odoo License:</strong> $0 (Open-Source Core)</li>
+                <li>• <strong>Canadian Cloud &amp; Backups:</strong> $1,620/yr (Host)</li>
+                <li>• <strong>AI Multi-Agent Tokens:</strong> $6,000/yr (Inference)</li>
+                <li>• <strong>Managed DevOps Retainer:</strong> $6,000/yr (Support)</li>
+                <li>• <strong>Net 3-Year Cash Savings:</strong> <strong class="text-emerald-700">CA$221,513</strong></li>
+              </ul>
             </div>
+            <div class="mt-4 pt-3 border-t border-emerald-300 text-xs text-emerald-900 font-bold">
+              🚀 100% PIPEDA Canadian data residency + AI automation.
+            </div>
+          </div>
+        </div>
+
+        <!-- Embedded Odoo Pricing Snapshot -->
+        <div class="p-5 bg-slate-50 border border-slate-200 rounded-2xl flex flex-col md:flex-row gap-6 items-center">
+          <div class="w-full md:w-1/3">
+            <img src="./odoo_cost_comparison.png" alt="Odoo Pricing Benchmark Calculator" class="w-full h-auto rounded-xl border border-slate-200 shadow-xs">
+          </div>
+          <div class="w-full md:w-2/3 space-y-3">
+            <span class="text-xs font-bold text-cyan-800 bg-cyan-100/70 border border-cyan-200 px-2.5 py-0.5 rounded-full uppercase">Official Odoo.com Benchmark</span>
+            <h4 class="text-base font-bold text-slate-900">Why Charities Are Reinvesting Software Rent into Mission</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              As demonstrated by the Odoo calculator benchmark for 20 users, fragmented SaaS tools consume <strong>CA$87,457.64 every year</strong>. By transitioning to Odoo, WaterAid Canada unlocks immediate savings of <strong>CA$79,000/year</strong> on software licensing alone.
+            </p>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              In our <strong>Self-Hosted Blueprint</strong>, hard infrastructure costs are reduced to just <strong>$1,620/year</strong>, allowing WaterAid Canada to dedicate budget to custom non-profit modules (`addons/wateraid_fundraising`) and Canadian-hosted AI agents. Over 3 years, <strong>over CA$221,000 in cash is redirected directly into clean water programming</strong>.
+            </p>
           </div>
         </div>
       </div>

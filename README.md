@@ -4,8 +4,8 @@
 [![Status](https://img.shields.io/badge/Status-Submission%20Ready-emerald.svg)](PROPOSAL.md)
 [![Track](https://img.shields.io/badge/Track-C%3A%20Systems%20Blueprint-blue.svg)](https://theaifellowship.ca/c/wateraid)
 [![Stack](https://img.shields.io/badge/Core-Odoo%20Open--Source%20%2B%20AI%20Orchestration-cyan.svg)](odoo_highlighted_modules.png)
-[![Governance](https://img.shields.io/badge/Governance-100%25%20Human--in--the--Loop-amber.svg)](dashboard.html)
 [![Addon](https://img.shields.io/badge/Odoo%20Module-wateraid__fundraising-purple.svg)](addons/wateraid_fundraising/)
+[![Cost Analysis](https://img.shields.io/badge/Cost%20Analysis-3--Way%20Comparison-orange.svg)](ADDENDUM_COST_ANALYSIS.md)
 
 ---
 
@@ -15,7 +15,7 @@ WaterAid Canada operates with a lean team managing an ambitious mandate: raising
 
 Current non-profit models force organizations to scale administrative overhead in linear proportion to their grant and donor volume. **This blueprint breaks that linear constraint.**
 
-By pairing an **open-source operational core (Odoo Community)** self-hosted in Canada with a **multi-agent AI orchestration layer**, WaterAid Canada eliminates proprietary software licensing costs ($48k+/year) while multiplying staff mission capacity by **4.2x over 3 years**—with zero staff reductions and strict Canadian privacy compliance (PIPEDA).
+By pairing an **open-source operational core (Odoo Community)** self-hosted in Canada with a **multi-agent AI orchestration layer**, WaterAid Canada eliminates proprietary software licensing costs while multiplying staff mission capacity by **4.2x over 3 years**—with zero staff reductions and strict Canadian privacy compliance (PIPEDA).
 
 ---
 
@@ -26,8 +26,30 @@ By pairing an **open-source operational core (Odoo Community)** self-hosted in C
 | 📊 **Executive Pitch Deck** | [`pitch_deck.html`](pitch_deck.html) *(or [`index.html`](index.html))* | Interactive 8-slide presentation with 5-minute timer, keyboard navigation, and speaker scripts. |
 | 🖥️ **Working Prototype** | [`dashboard.html`](dashboard.html) | Interactive web dashboard demonstrating Odoo field ticket ingestion and clickable citation verification. |
 | 📄 **Full Technical Proposal** | [`PROPOSAL.md`](PROPOSAL.md) | Comprehensive 3-year Systems Blueprint, architectural specifications, and gating criteria. |
+| 💰 **3-Way Cost Analysis Addendum** | [`ADDENDUM_COST_ANALYSIS.md`](ADDENDUM_COST_ANALYSIS.md) | Detailed comparison: Current Proprietary Stack ($87.5k/yr) vs. Odoo Hosted ($8.4k/yr) vs. Self-Hosted ($13.6k/yr). |
 | 🧩 **Odoo Module Map** | [`odoo_highlighted_modules.png`](odoo_highlighted_modules.png) | Visual layout of the 11 targeted Odoo modules configured for WaterAid Canada. |
 | 📦 **Custom Odoo Module** | [`addons/wateraid_fundraising/`](addons/wateraid_fundraising/) | Production-ready open-source Odoo 17/18 module: CRA Reg. 3501 tax receipts, CFAP designations, pledges, and AI stewardship. |
+
+---
+
+## 💰 Financial Summary: 3-Way Cost Analysis (20 Users)
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ Annual Operational Cost Comparison (20 Users)                                         │
+├─────────────────────────────────────────────────┬──────────────────────┬───────────────┤
+│ Operational Model                               │ Annual Cost (CAD)    │ 3-Year Total  │
+├─────────────────────────────────────────────────┼──────────────────────┼───────────────┤
+│ 1. Current State of Play (Blackbaud/SaaS Stack) │ CA$87,457.64 / year  │ CA$262,372.92 │
+│ 2. Odoo Hosted (Odoo.com SaaS Benchmark)        │ CA$8,448.00 / year   │ CA$25,344.00  │
+│ 3. Odoo Self-Hosted (Canadian Cloud + AI Layer) │ CA$13,620.00 / year* │ CA$40,860.00  │
+└─────────────────────────────────────────────────┴──────────────────────┴───────────────┘
+*Includes $6,000/yr for AI multi-agent tokens and $6,000/yr for managed DevOps support. 
+Cloud compute & infrastructure alone is only ~CA$1,620/year.
+```
+
+**Net 3-Year Cash Savings with Self-Hosted Blueprint:** **CA$221,512.92 reinvested directly into WASH programming.**  
+👉 *See the full line-item breakdown in [ADDENDUM_COST_ANALYSIS.md](ADDENDUM_COST_ANALYSIS.md).*
 
 ---
 
@@ -118,7 +140,7 @@ Reputation and trust are non-negotiable for an international development charity
 
 ## 💰 The Board ROI (The Human Bottom Line)
 
-* **$105,000 Direct Cash Saved:** Replaces recurring proprietary SaaS licensing fees over 3 years, reinvesting capital directly into clean water points.
+* **CA$221,000+ Cumulative Cash Saved:** Replaces recurring proprietary SaaS fees over 3 years, reinvesting capital directly into clean water points.
 * **6,800 Staff Hours/Year Multiplied:** Routine administrative and compliance burden eliminated.
 * **+4 FTE Capacity Added:** Output equivalent to adding 4 senior full-time grant and development officers with $0 added payroll.
 * **140,000 Additional People Reached:** Measurable expansion in WaterAid Canada's clean water and sanitation footprint.
